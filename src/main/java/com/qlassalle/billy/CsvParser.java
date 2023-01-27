@@ -4,13 +4,12 @@ import com.qlassalle.billy.domain.Event;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class CsvInputParser {
+public class CsvParser {
 
     public List<Event> parse(String csv) {
         return Arrays.stream(csv.split("\n"))
@@ -23,15 +22,26 @@ public class CsvInputParser {
         var fields = line.split(",");
         var startDate = dateFromString(fields[2]);
         var endDate = dateFromString(fields[3]);
-        var lineUp = Arrays.stream(fields[9].split("-")).toList();
-        return new Event(parseInt(fields[0]), fields[1], startDate, endDate, fields[4], fields[5], parseInt(fields[6]),
+        var lineUp = buildLineUp(fields[9]);
+        var optionalLocation = fields[4].isEmpty() ? null : fields[4];
+
+        return new Event(parseInt(fields[0]), fields[1], startDate, endDate, optionalLocation, fields[5], parseInt(fields[6]),
                          parseInt(fields[7]), fields[8], lineUp, fields[10]);
+    }
+
+    private static List<String> buildLineUp(String lineUp) {
+        if (lineUp.isEmpty()) {
+            return List.of();
+        }
+
+        return Arrays.stream(lineUp.split("-")).toList();
     }
 
     private long dateFromString(String date) {
         var convertibleDate = date.split(" ");
         var parsedDate = convertibleDate[0].split("/");
         var parsedTime = convertibleDate[1].split(":");
+
         return LocalDateTime.of(parseInt(parsedDate[2]),
                                 parseInt(parsedDate[1]),
                                 parseInt(parsedDate[0]),
