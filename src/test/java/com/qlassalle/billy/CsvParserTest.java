@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static com.qlassalle.billy.Fixtures.buildExpectedObjectWithoutOptionalLocation;
+import static com.qlassalle.billy.Fixtures.buildExpectedObjectWithoutOptionalLocationAndLineUp;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CsvParserTest {
@@ -18,7 +20,7 @@ class CsvParserTest {
                                        .getResourceAsStream("input/csv/event-with-all-fields.csv")
                                        .readAllBytes());
         var parsedLine = parser.parse(csv);
-        assertThat(parsedLine.get(0)).isEqualTo(List.of(buildExpectedObjectWithOptional()).get(0));
+        assertThat(parsedLine).isEqualTo(List.of(Fixtures.buildFullEvent()));
     }
 
     @Test
@@ -37,21 +39,5 @@ class CsvParserTest {
                                        .readAllBytes());
         var parsedLine = parser.parse(csv);
         assertThat(parsedLine).isEqualTo(List.of(buildExpectedObjectWithoutOptionalLocationAndLineUp()));
-    }
-
-    private Event buildExpectedObjectWithOptional() {
-        return new Event(1, "Mouse Party", 1657470600, 1657494000, "L'Astrolabe",
-                         "1 Rue Alexandre Avisse 45000 Orléans", 500, 5, "01/07/2022",
-                         List.of("Mehdi Maïzi", "Rad Cartier", "Squidji"), "https://photos.com/mouseparty.png");
-    }
-
-    private Event buildExpectedObjectWithoutOptionalLocation() {
-        return new Event(4, "Coldplay World Tour", 1659119400, 1659135600, null, "93200 Saint-Denis",
-                         10000, 6, "04/05/2022", List.of("Artist 1", "Artist 2"), "https://coldplay.com/coldplay_asset.mp4");
-    }
-
-    private Event buildExpectedObjectWithoutOptionalLocationAndLineUp() {
-        return new Event(4, "Coldplay World Tour", 1659119400, 1659135600, null, "93200 Saint-Denis",
-                         10000, 6, "04/05/2022", List.of(), "https://coldplay.com/coldplay_asset.mp4");
     }
 }
