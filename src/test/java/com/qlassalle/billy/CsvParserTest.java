@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static com.qlassalle.billy.Fixtures.buildExpectedObjectWithoutOptionalLocation;
-import static com.qlassalle.billy.Fixtures.buildExpectedObjectWithoutOptionalLocationAndLineUp;
-import static com.qlassalle.billy.Fixtures.buildFullEvent;
+import static com.qlassalle.billy.Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CsvParserTest {

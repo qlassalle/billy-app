@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/billy
+    username: billy-app
+    password: bestpassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  flyway:
+    locations: 'classpath:db/migrations'

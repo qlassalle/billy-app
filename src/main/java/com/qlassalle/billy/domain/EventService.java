@@ -1,5 +1,9 @@
 package com.qlassalle.billy.domain;
 
+import com.qlassalle.billy.ports.EventRepository;
+import org.springframework.stereotype.Service;
+
+@Service
 public class EventService {
 
     private final EventRepository eventRepository;

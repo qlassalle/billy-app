@@ -1,6 +1,7 @@
 package com.qlassalle.billy;
 
 import com.qlassalle.billy.domain.Event;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

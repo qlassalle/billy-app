@@ -1,7 +1,7 @@
 package com.qlassalle.billy;
 
 import com.qlassalle.billy.domain.Event;
-import com.qlassalle.billy.domain.EventRepository;
+import com.qlassalle.billy.ports.EventRepository;
 
 import java.util.ArrayList;
 import java.util.List;
