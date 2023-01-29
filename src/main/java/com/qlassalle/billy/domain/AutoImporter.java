@@ -21,13 +21,9 @@ public class AutoImporter {
         try (var inputStream = getClass().getClassLoader().getResourceAsStream(CSV_PATH)) {
             var csv = new String(inputStream.readAllBytes());
             var parsedLine = csvParser.parse(csv);
-            parsedLine.forEach(event -> {
-                System.out.println("saving");
-                eventRepository.save(event);
-            });
+            parsedLine.forEach(eventRepository::save);
         } catch (IOException e) {
-            // TODO: 28/01/2023 handle this
-            throw new RuntimeException(e);
+            throw new RuntimeException("Unable to save events from CSV");
         }
     }
 }
