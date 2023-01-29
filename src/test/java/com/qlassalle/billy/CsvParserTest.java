@@ -1,5 +1,6 @@
 package com.qlassalle.billy;
 
+import com.qlassalle.billy.domain.CsvParser;
 import com.qlassalle.billy.domain.Event;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

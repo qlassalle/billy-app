@@ -1,4 +1,4 @@
-package com.qlassalle.billy;
+package com.qlassalle.billy.domain;
 
 import com.qlassalle.billy.domain.Event;
 
@@ -11,6 +11,9 @@ import static java.lang.Integer.parseInt;
 
 public class CsvParser {
 
+    private static final String LINE_UP_SEPARATOR = "-";
+    private static final String CSV_FIELD_SEPARATOR = ",";
+
     public List<Event> parse(String csv) {
         return Arrays.stream(csv.split("\n"))
                      .skip(1)
@@ -19,7 +22,7 @@ public class CsvParser {
     }
 
     private Event buildEvent(String line) {
-        var fields = line.split(",");
+        var fields = line.split(CSV_FIELD_SEPARATOR);
         var startDate = dateFromString(fields[2]);
         var endDate = dateFromString(fields[3]);
         var lineUp = buildLineUp(fields[9]);
@@ -34,7 +37,7 @@ public class CsvParser {
             return List.of();
         }
 
-        return Arrays.stream(lineUp.split("-")).toList();
+        return Arrays.stream(lineUp.split(LINE_UP_SEPARATOR)).toList();
     }
 
     private long dateFromString(String date) {

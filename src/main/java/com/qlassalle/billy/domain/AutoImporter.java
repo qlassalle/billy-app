@@ -1,6 +1,5 @@
 package com.qlassalle.billy.domain;
 
-import com.qlassalle.billy.CsvParser;
 import com.qlassalle.billy.ports.EventRepository;
 import org.springframework.stereotype.Component;
 
