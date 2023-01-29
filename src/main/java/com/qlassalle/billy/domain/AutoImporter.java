@@ -23,7 +23,7 @@ public class AutoImporter {
             var parsedLine = csvParser.parse(csv);
             parsedLine.forEach(eventRepository::save);
         } catch (IOException e) {
-            throw new RuntimeException("Unable to save events from CSV");
+            throw new RuntimeException("Unable to save events from CSV", e);
         }
     }
 }
