@@ -29,6 +29,18 @@ public class SmartContractEvent {
         this.smartContract = smartContract;
     }
 
+    public int getEventId() {
+        return eventId;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public SmartContract getSmartContract() {
+        return smartContract;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -16,6 +16,10 @@ public class SaleCurrency {
         this.xtz = xtz;
     }
 
+    public String getXtz() {
+        return xtz;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

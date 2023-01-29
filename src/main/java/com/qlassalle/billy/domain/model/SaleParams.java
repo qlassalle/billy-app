@@ -61,6 +61,38 @@ public class SaleParams {
         this.endTime = endTime;
     }
 
+    public boolean isPresale() {
+        return presale;
+    }
+
+    public List<String> getMetadataList() {
+        return metadataList;
+    }
+
+    public int getPricePerToken() {
+        return pricePerToken;
+    }
+
+    public int getMaxMintPerUser() {
+        return maxMintPerUser;
+    }
+
+    public int getSaleSize() {
+        return saleSize;
+    }
+
+    public SaleCurrency getSaleCurrency() {
+        return saleCurrency;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

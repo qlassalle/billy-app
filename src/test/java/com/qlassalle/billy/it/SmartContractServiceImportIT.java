@@ -1,4 +1,4 @@
-package com.qlassalle.billy;
+package com.qlassalle.billy.it;
 
 import org.assertj.db.type.Table;
 import org.junit.jupiter.api.Test;
@@ -10,15 +10,15 @@ import javax.sql.DataSource;
 import static org.assertj.db.api.Assertions.assertThat;
 
 @SpringBootTest
-class EventServiceImportIT {
+class SmartContractServiceImportIT extends IntegrationTest {
 
     @Autowired
     private DataSource dataSource;
 
     @Test
-    void shouldImportCsvOnStartup() {
-        Table table = new Table(dataSource, "event");
+    void shouldImportJsonOnStartup() {
+        Table table = new Table(dataSource, "smart_contract_event");
 
-        assertThat(table).hasNumberOfRows(5);
+        assertThat(table).hasNumberOfRows(8);
     }
 }

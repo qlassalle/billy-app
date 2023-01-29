@@ -1,5 +1,6 @@
 package com.qlassalle.billy.adapters;
 
+import com.qlassalle.billy.adapters.entities.EventEntity;
 import com.qlassalle.billy.domain.Event;
 import com.qlassalle.billy.ports.EventRepository;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.qlassalle.billy.adapters;
+package com.qlassalle.billy.adapters.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

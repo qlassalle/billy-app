@@ -13,7 +13,8 @@ public class JsonParser {
     public List<SmartContractEvent> parse(String json) {
         try {
             var mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-            return mapper.readValue(json, new TypeReference<List<SmartContractEvent>>() {});
+            return mapper.readValue(json, new TypeReference<>() {
+            });
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException("Unable to deserialize the following json: " + json, e);
         }

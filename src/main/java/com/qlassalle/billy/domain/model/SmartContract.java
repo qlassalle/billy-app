@@ -35,6 +35,22 @@ public class SmartContract {
         this.saleParams = saleParams;
     }
 
+    public String getCrowdsale() {
+        return crowdsale;
+    }
+
+    public String getCollection() {
+        return collection;
+    }
+
+    public String getMultisig() {
+        return multisig;
+    }
+
+    public SaleParams getSaleParams() {
+        return saleParams;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
