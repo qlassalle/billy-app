@@ -4,8 +4,6 @@ import com.qlassalle.billy.domain.Event;
 import com.qlassalle.billy.ports.EventRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class MySqlEventRepository implements EventRepository {
 
