@@ -14,4 +14,9 @@ public class InMemoryEventRepository implements EventRepository {
     public void save(Event event) {
         events.add(event);
     }
+
+    @Override
+    public List<Event> findAll() {
+        return events;
+    }
 }

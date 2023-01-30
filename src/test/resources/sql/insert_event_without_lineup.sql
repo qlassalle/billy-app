@@ -1,0 +1,3 @@
+INSERT INTO `event` VALUES (1,'Mouse Party',1657470600,1657494000,'L\'Astrolabe','1 Rue Alexandre Avisse 45000 Orléans',500,5,'01/07/2022','','https://photos.com/mouseparty.png');
+
+INSERT INTO `smart_contract_event` VALUES (1,1,'Mouse On','{"crowdsale\":\"KT1AKqxCJH9EPimNm1wo1BEgG9bFRgptJwkk\",\"collection\":\"KT1Apf8CPkYBe3bRuTCET6A4NhnosX2BAnp9\",\"multisig\":\"KT1Aer6TxNwoMJejoqsNP8TEN7J6STgMtJcA\",\"saleParams\":{\"presale\":false,\"metadataList\":[],\"pricePerToken\":4,\"maxMintPerUser\":5,\"saleSize\":500,\"saleCurrency\":{\"xtz\":null},\"startTime\":1656626400,\"endTime\":1657490400}}');

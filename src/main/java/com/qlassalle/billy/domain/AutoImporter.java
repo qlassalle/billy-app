@@ -20,8 +20,8 @@ public class AutoImporter {
     public AutoImporter(EventRepository eventRepository, SmartContractEventRepository smartContractEventRepository) {
         this.eventRepository = eventRepository;
         this.smartContractEventRepository = smartContractEventRepository;
-        importCsv();
-        importJson();
+//        importCsv();
+//        importJson();
     }
 
     private void importCsv() {

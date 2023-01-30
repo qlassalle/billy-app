@@ -1,9 +1,8 @@
 package com.qlassalle.billy.adapters.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +21,9 @@ public class EventEntity {
     private String saleStartDate;
     private String lineUp;
     private String mediaUrl;
+    @OneToMany
+    @JoinColumn(name = "event_id")
+    private List<SmartContractEventEntity> smartContractEvents;
 
     public EventEntity() {
     }
@@ -40,6 +42,54 @@ public class EventEntity {
         this.saleStartDate = saleStartDate;
         this.lineUp = lineUp;
         this.mediaUrl = mediaUrl;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getStartDate() {
+        return startDate;
+    }
+
+    public long getEndDate() {
+        return endDate;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getTotalTicketNumber() {
+        return totalTicketNumber;
+    }
+
+    public int getMaxTicketsPerUser() {
+        return maxTicketsPerUser;
+    }
+
+    public String getSaleStartDate() {
+        return saleStartDate;
+    }
+
+    public String getLineUp() {
+        return lineUp;
+    }
+
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
+    public List<SmartContractEventEntity> getSmartContractEvents() {
+        return smartContractEvents;
     }
 
     @Override

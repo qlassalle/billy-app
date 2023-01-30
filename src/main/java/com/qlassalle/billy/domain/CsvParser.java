@@ -1,7 +1,5 @@
 package com.qlassalle.billy.domain;
 
-import com.qlassalle.billy.domain.Event;
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
@@ -29,7 +27,7 @@ public class CsvParser {
         var optionalLocation = fields[4].isEmpty() ? null : fields[4];
 
         return new Event(parseInt(fields[0]), fields[1], startDate, endDate, optionalLocation, fields[5], parseInt(fields[6]),
-                         parseInt(fields[7]), fields[8], lineUp, fields[10]);
+                         parseInt(fields[7]), fields[8], lineUp, fields[10], List.of());
     }
 
     private static List<String> buildLineUp(String lineUp) {

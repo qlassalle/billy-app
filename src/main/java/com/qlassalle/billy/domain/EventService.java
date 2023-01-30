@@ -3,6 +3,8 @@ package com.qlassalle.billy.domain;
 import com.qlassalle.billy.ports.EventRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventService {
 
@@ -14,5 +16,9 @@ public class EventService {
 
     public void save(Event event) {
         eventRepository.save(event);
+    }
+
+    public List<Event> findAll() {
+        return eventRepository.findAll();
     }
 }

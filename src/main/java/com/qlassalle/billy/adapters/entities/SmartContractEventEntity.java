@@ -11,6 +11,7 @@ public class SmartContractEventEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "event_id")
     private int eventId;
 
     private String collectionName;
@@ -25,5 +26,21 @@ public class SmartContractEventEntity {
         this.eventId = eventId;
         this.collectionName = collectionName;
         this.smartContract = smartContract;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public SmartContract getSmartContract() {
+        return smartContract;
     }
 }
