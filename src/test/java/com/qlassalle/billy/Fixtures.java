@@ -6,6 +6,8 @@ import com.qlassalle.billy.domain.model.SaleParams;
 import com.qlassalle.billy.domain.model.SmartContract;
 import com.qlassalle.billy.domain.model.SmartContractEvent;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class Fixtures {
@@ -38,6 +40,13 @@ public class Fixtures {
                                  ".com/mouseparty.png", List.of(buildFirstSmartContractEvent()));
     }
 
+    static Event buildFullEventWithFutureSale() {
+        long startDate = Instant.now().plus(1, ChronoUnit.DAYS).getEpochSecond();
+        return new Event(1, "Mouse Party", startDate, 1657494000, "L'Astrolabe", "1 Rue Alexandre Avisse 45000 " +
+                "Orléans", 500, 5, "01/07/2022", List.of("Mehdi Maïzi", "Rad Cartier", "Squidji"), "https://photos" +
+                                 ".com/mouseparty.png", List.of(buildSecondSmartContractEvent()));
+    }
+
     static List<SmartContractEvent> buildSmartContractEvent() {
         return List.of(buildFirstSmartContractEvent(), buildSecondSmartContractEvent());
     }
@@ -54,13 +63,11 @@ public class Fixtures {
 
     private static SmartContractEvent buildSecondSmartContractEvent() {
         var saleParams = new SaleParams(false, List.of(), 0, 2, 100,
-                                        new SaleCurrency(null), 1657404000,
+                                        new SaleCurrency(null), 1727775935,
                                         1658181600);
         var smartContract = new SmartContract("KT1BKqxCJH9EPimNm1wo1BEgG9bFRgptJwop",
                                               "KT1Gpf8CPkYBe3bRuTCET6A4NhnosX2BAnp6",
                                               "KT1Itr6TxNwoMJejoqsNP8TEN7J6STgMtJcP", saleParams);
         return new SmartContractEvent(2, "Web 3 Classic Collection", smartContract);
     }
-
-
 }

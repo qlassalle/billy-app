@@ -9,4 +9,6 @@ public interface EventRepository {
     void save(Event event);
 
     List<Event> findAll();
+
+    List<Event> findAllFromStartDate(long epochSecond);
 }

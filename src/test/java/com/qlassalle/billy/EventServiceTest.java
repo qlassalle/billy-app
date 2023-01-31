@@ -4,6 +4,7 @@ import com.qlassalle.billy.domain.EventService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
 import java.util.List;
 
 import static com.qlassalle.billy.Fixtures.*;
@@ -43,5 +44,15 @@ class EventServiceTest {
         var events = eventService.findAll();
 
         assertThat(events).isEqualTo(List.of(event));
+    }
+
+    @Test
+    void shouldReturnAllEventsAfterSomeDate() {
+        var events = List.of(buildFullEvent(), buildFullEventWithFutureSale());
+        eventRepository.events.addAll(events);
+
+        var foundEvents = eventService.findAllFromStartDate(Instant.now().getEpochSecond());
+
+        assertThat(foundEvents).isEqualTo(List.of(buildFullEventWithFutureSale()));
     }
 }

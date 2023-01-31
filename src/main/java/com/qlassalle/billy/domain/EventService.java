@@ -21,4 +21,8 @@ public class EventService {
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
+
+    public List<Event> findAllFromStartDate(long epochSecond) {
+        return eventRepository.findAllFromStartDate(epochSecond);
+    }
 }

@@ -5,9 +5,11 @@ import com.qlassalle.billy.domain.Event;
 import com.qlassalle.billy.ports.EventRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 public class MySqlEventRepository implements EventRepository {
@@ -28,11 +30,31 @@ public class MySqlEventRepository implements EventRepository {
         return eventRepository.findAll().stream().map(this::toModel).toList();
     }
 
+    /**
+     * This method is awful and this logic should be performed in a SQL query
+     */
+    @Override
+    public List<Event> findAllFromStartDate(long epochSecond) {
+        return eventRepository.findAll()
+                              .stream()
+                              .filter(e -> e.getSmartContractEvents()
+                                            .stream()
+                                            .filter(sc -> sc.getSmartContract()
+                                                            .getSaleParams()
+                                                            .getStartTime() >= epochSecond)
+                                            .toList()
+                                            .size() > 0)
+                              .map(this::toModel)
+                              .toList();
+    }
+
     private Event toModel(EventEntity event) {
-        var lineUp = Stream.of(event.getLineUp().split(","))
-                           .map(String::trim)
-                           .filter(artist -> !"".equals(artist))
-                           .collect(Collectors.toList());
+        var lineUp = Optional.ofNullable(event.getLineUp())
+                             .map(artists -> Arrays.stream(artists.split(","))
+                                                   .map(String::trim)
+                                                   .filter(artist -> !artist.isEmpty())
+                                                   .collect(Collectors.toList()))
+                             .orElse(Collections.emptyList());
 
         return new Event(event.getId(), event.getName(), event.getStartDate(), event.getEndDate(),
                          event.getLocation(), event.getAddress(), event.getTotalTicketNumber(),

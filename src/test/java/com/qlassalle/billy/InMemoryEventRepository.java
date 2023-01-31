@@ -19,4 +19,9 @@ public class InMemoryEventRepository implements EventRepository {
     public List<Event> findAll() {
         return events;
     }
+
+    @Override
+    public List<Event> findAllFromStartDate(long epochSecond) {
+        return List.of(Fixtures.buildFullEventWithFutureSale());
+    }
 }
