@@ -55,7 +55,7 @@ public class EventDTO {
      * from instant
      */
     private String formatDate(long epoch) {
-        var asString = Instant.ofEpochMilli(epoch * 1000).toString();
+        var asString = Instant.ofEpochSecond(epoch).toString();
 
         return asString.substring(0, asString.length() - 1);
     }
