@@ -12,8 +12,9 @@ public class InMemoryEventRepository implements EventRepository {
     List<Event> events = new ArrayList<>();
 
     @Override
-    public void save(Event event) {
+    public Event save(Event event) {
         events.add(event);
+        return event;
     }
 
     @Override
@@ -31,5 +32,13 @@ public class InMemoryEventRepository implements EventRepository {
         return events.stream()
                      .filter(e -> e.id() == id)
                      .findFirst();
+    }
+
+    @Override
+    public Event getById(int id) {
+        return events.stream()
+                     .filter(e -> e.id() == id)
+                     .findFirst()
+                     .orElseThrow(() -> new RuntimeException("Event " + id + "doesn't exist"));
     }
 }

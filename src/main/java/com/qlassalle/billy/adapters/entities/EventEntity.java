@@ -21,7 +21,7 @@ public class EventEntity {
     private String saleStartDate;
     private String lineUp;
     private String mediaUrl;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id")
     private List<SmartContractEventEntity> smartContractEvents;
 
@@ -42,6 +42,23 @@ public class EventEntity {
         this.saleStartDate = saleStartDate;
         this.lineUp = lineUp;
         this.mediaUrl = mediaUrl;
+    }
+
+    public EventEntity(int id, String name, long startDate, long endDate, String location, String address,
+                       int totalTicketNumber, int maxTicketsPerUser, String saleStartDate, String lineUp,
+                       String mediaUrl, List<SmartContractEventEntity> smartContractEvents) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.address = address;
+        this.totalTicketNumber = totalTicketNumber;
+        this.maxTicketsPerUser = maxTicketsPerUser;
+        this.saleStartDate = saleStartDate;
+        this.lineUp = lineUp;
+        this.mediaUrl = mediaUrl;
+        this.smartContractEvents = smartContractEvents;
     }
 
     public int getId() {

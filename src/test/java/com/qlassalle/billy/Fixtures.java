@@ -58,7 +58,7 @@ public class Fixtures {
         var smartContract = new SmartContract("KT1AKqxCJH9EPimNm1wo1BEgG9bFRgptJwkk",
                                               "KT1Apf8CPkYBe3bRuTCET6A4NhnosX2BAnp9",
                                               "KT1Aer6TxNwoMJejoqsNP8TEN7J6STgMtJcA", saleParams);
-        return new SmartContractEvent(1, "Mouse On", smartContract);
+        return new SmartContractEvent(1, 1, "Mouse On", smartContract);
     }
 
     private static SmartContractEvent buildSecondSmartContractEvent() {
@@ -68,6 +68,6 @@ public class Fixtures {
         var smartContract = new SmartContract("KT1BKqxCJH9EPimNm1wo1BEgG9bFRgptJwop",
                                               "KT1Gpf8CPkYBe3bRuTCET6A4NhnosX2BAnp6",
                                               "KT1Itr6TxNwoMJejoqsNP8TEN7J6STgMtJcP", saleParams);
-        return new SmartContractEvent(2, "Web 3 Classic Collection", smartContract);
+        return new SmartContractEvent(2, 2, "Web 3 Classic Collection", smartContract);
     }
 }

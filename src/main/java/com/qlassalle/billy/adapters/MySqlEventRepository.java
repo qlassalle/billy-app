@@ -21,8 +21,8 @@ public class MySqlEventRepository implements EventRepository {
     }
 
     @Override
-    public void save(Event event) {
-        eventRepository.save(toEntity(event));
+    public Event save(Event event) {
+        return toModel(eventRepository.save(toEntity(event)));
     }
 
     @Override
@@ -54,6 +54,11 @@ public class MySqlEventRepository implements EventRepository {
                               .map(this::toModel);
     }
 
+    @Override
+    public Event getById(int id) {
+        return findById(id).orElseThrow(() -> new RuntimeException("Event " + id + " doesn't exist"));
+    }
+
     private Event toModel(EventEntity event) {
         var lineUp = Optional.ofNullable(event.getLineUp())
                              .map(artists -> Arrays.stream(artists.split(","))
@@ -76,6 +81,7 @@ public class MySqlEventRepository implements EventRepository {
 
         return new EventEntity(event.id(), event.name(), event.startDate(), event.endDate(), event.location(),
                                event.address(), event.totalTicketNumber(), event.maxTicketsPerUser(),
-                               event.saleStartDate(), lineUp, event.mediaUrl());
+                               event.saleStartDate(), lineUp, event.mediaUrl(),
+                               SmartContractEventEntityMapper.toEntity(event.smartContractEvents()));
     }
 }

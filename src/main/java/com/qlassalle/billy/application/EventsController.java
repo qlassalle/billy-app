@@ -1,11 +1,9 @@
 package com.qlassalle.billy.application;
 
 import com.qlassalle.billy.domain.EventService;
+import com.qlassalle.billy.domain.model.input.UpdateEventRequest;
 import com.qlassalle.billy.domain.model.output.EventDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,5 +39,10 @@ public class EventsController {
     public Optional<EventDTO> get(@PathVariable int id) {
         return eventService.findById(id)
                            .map(EventDTO::new);
+    }
+
+    @PutMapping("/{id}")
+    public EventDTO update(@RequestBody UpdateEventRequest updateEventRequest) {
+        return new EventDTO(eventService.update(updateEventRequest));
     }
 }

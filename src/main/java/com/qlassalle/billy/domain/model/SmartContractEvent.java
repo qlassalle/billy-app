@@ -4,17 +4,23 @@ import java.util.Objects;
 
 public class SmartContractEvent {
 
+    private int id;
     private int eventId;
     private String collectionName;
     private SmartContract smartContract;
 
-    public SmartContractEvent(int eventId, String collectionName, SmartContract smartContract) {
+    public SmartContractEvent(int id, int eventId, String collectionName, SmartContract smartContract) {
+        this.id = id;
         this.eventId = eventId;
         this.collectionName = collectionName;
         this.smartContract = smartContract;
     }
 
     public SmartContractEvent() {
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getEventId() {
@@ -38,11 +44,11 @@ public class SmartContractEvent {
             return false;
         }
         SmartContractEvent that = (SmartContractEvent) o;
-        return eventId == that.eventId && Objects.equals(collectionName, that.collectionName) && Objects.equals(smartContract, that.smartContract);
+        return id == that.id && eventId == that.eventId && Objects.equals(collectionName, that.collectionName) && Objects.equals(smartContract, that.smartContract);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, collectionName, smartContract);
+        return Objects.hash(id, eventId, collectionName, smartContract);
     }
 }

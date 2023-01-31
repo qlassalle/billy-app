@@ -7,11 +7,13 @@ import java.util.Optional;
 
 public interface EventRepository {
 
-    void save(Event event);
+    Event save(Event event);
 
     List<Event> findAll();
 
     List<Event> findAllFromStartDate(long epochSecond);
 
     Optional<Event> findById(int id);
+
+    Event getById(int id);
 }
