@@ -47,10 +47,6 @@ public class Fixtures {
                                  ".com/mouseparty.png", List.of(buildSecondSmartContractEvent()));
     }
 
-    static List<SmartContractEvent> buildSmartContractEvent() {
-        return List.of(buildFirstSmartContractEvent(), buildSecondSmartContractEvent());
-    }
-
     private static SmartContractEvent buildFirstSmartContractEvent() {
         var saleParams = new SaleParams(false, List.of(), 4, 5, 500,
                                         new SaleCurrency(null), 1656626400,

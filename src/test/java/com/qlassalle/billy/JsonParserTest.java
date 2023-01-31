@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static com.qlassalle.billy.Fixtures.buildSmartContractEvent;
+import static com.qlassalle.billy.ParserFixtures.buildSmartContractEvent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class JsonParserTest {
