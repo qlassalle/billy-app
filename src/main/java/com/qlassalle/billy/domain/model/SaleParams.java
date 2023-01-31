@@ -33,34 +33,6 @@ public class SaleParams {
         this.presale = presale;
     }
 
-    public void setMetadataList(List<String> metadataList) {
-        this.metadataList = metadataList;
-    }
-
-    public void setPricePerToken(int pricePerToken) {
-        this.pricePerToken = pricePerToken;
-    }
-
-    public void setMaxMintPerUser(int maxMintPerUser) {
-        this.maxMintPerUser = maxMintPerUser;
-    }
-
-    public void setSaleSize(int saleSize) {
-        this.saleSize = saleSize;
-    }
-
-    public void setSaleCurrency(SaleCurrency saleCurrency) {
-        this.saleCurrency = saleCurrency;
-    }
-
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(long endTime) {
-        this.endTime = endTime;
-    }
-
     public boolean isPresale() {
         return presale;
     }

@@ -17,18 +17,6 @@ public class SmartContractEvent {
     public SmartContractEvent() {
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
-
-    public void setCollectionName(String collectionName) {
-        this.collectionName = collectionName;
-    }
-
-    public void setSmartContract(SmartContract smartContract) {
-        this.smartContract = smartContract;
-    }
-
     public int getEventId() {
         return eventId;
     }

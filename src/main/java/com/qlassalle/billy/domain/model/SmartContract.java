@@ -19,22 +19,6 @@ public class SmartContract {
         this.saleParams = saleParams;
     }
 
-    public void setCrowdsale(String crowdsale) {
-        this.crowdsale = crowdsale;
-    }
-
-    public void setCollection(String collection) {
-        this.collection = collection;
-    }
-
-    public void setMultisig(String multisig) {
-        this.multisig = multisig;
-    }
-
-    public void setSaleParams(SaleParams saleParams) {
-        this.saleParams = saleParams;
-    }
-
     public String getCrowdsale() {
         return crowdsale;
     }

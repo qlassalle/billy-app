@@ -9,12 +9,7 @@ public class SaleCurrency {
         this.xtz = xtz;
     }
 
-    public SaleCurrency() {
-    }
-
-    public void setXtz(String xtz) {
-        this.xtz = xtz;
-    }
+    public SaleCurrency() {}
 
     public String getXtz() {
         return xtz;
