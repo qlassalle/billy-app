@@ -3,6 +3,7 @@ version: '3.7'
 services:
   db:
     image: mysql:8.0.32
+    container_name: billy-app-db
     restart: always
     environment:
       MYSQL_DATABASE: billy
@@ -10,4 +11,4 @@ services:
       MYSQL_PASSWORD: bestpassword
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3306:3306
+      - "3306:3306"

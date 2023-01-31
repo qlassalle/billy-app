@@ -1,99 +1,60 @@
-# Retrieve raw events data
+# How to run
 
-Your goal is to create a tool that gathers and parses events and related smart contracts information in
-order to make them exploitable and create an API that can be used by the team.
+## With Docker (preferred way if you don't have Java installed)
+* Start the db first: `docker-compose up -d`
 
-#### Next : 
-- Use case
-  - Specifications
-- Instructions
-  - Programming language
-  - Why do the coding exercise
-  - Timeline to finish the exercise
+* Build the image: `docker build --no-cache -t billy-app:1 -f ./Dockerfile .`
 
-## Use case
+* Run the container and enter it: `docker run -it --rm billy-app:1 /bin/sh`
 
-The data we manipulate in our application come from two different sources :
+* Inside the container, run the tests: `./mvnw test` or use the commands described in the next section to run the API.
 
-- a `csv file` completed by the events organizers
-  that contains all the events information (for example, the event title, the event date, etc.)
-- a `json file` containing the information of the new smart contract we deployed on the blockchain. The smart contract is associated with
-  the event (using the event id) and contains the information related to the nft collection (ticket collection). 
+> I considered coming up with a single docker-compose file that brings everything to life, but it meant creating a service 
+> to let the containers communicate, therefore a custom spring profile, and then passing in the correct parameters when 
+> launching the app. I thought that writing these 4 commands instead was providing a good enough experience.
 
-In order to use these data and share them with our partners we would want them to be exposed via a REST API. The output that
-we would expect for a given event should look like the example below :
+## With java installed:
+You'll need Java 17 to run this project.
 
-```json
-[
-  {
-    "eventId": 1,
-    "title": "Mouse Party",
-    "startDatetime": "2022-07-10T18:30:00",
-    "endDatetime": "2022-07-11T01:00:00",
-    "address": "1 Rue Alexandre Avisse 45000 Orléans",
-    "locationName": "L'Astrolabe",
-    "totalTicketsCount": 500,
-    "assetUrl": "https://photos.com/mouseparty.png",
-    "lineUp": [
-      "Mehdi Maïzi",
-      "Rad Cartier",
-      "Squidji"
-    ],
-    "ticketCollections": [
-      {
-        "collectionName": "Mouse On",
-        "scAddress": "KT1AKqxCJH9EPimNm1wo1BEgG9bFRgptJwkk",
-        "collectionAddress": "KT1Apf8CPkYBe3bRuTCET6A4NhnosX2BAnp9",
-        "pricePerToken": 4,
-        "maxMintPerUser": 5,
-        "saleSize": 500
-      }
-    ]
-  }
-]
+You can run the tests with the `./mvnw test` command.
+
+To run the API, you can use these commands: 
+```shell
+./mvnw package
+java -jar billy-app-0.0.1-SNAPSHOT.jar
 ```
 
-### Specifications
+In order to import the data and then query one event, you can use the following commands:
+```shell
+curl localhost:8080/import
+curl localhost:8080/events/1
+```
 
-- The fields name should be in camelCase not in snake_case.
-- `lineUp` and `locationName` fields are optional. When the value doesn't exist, the field should be null. 
-- `lineUp` field type is a list. In the csv file the different names are separated with "-".
-- The format of the asset contained in the `assetUrl` field should be mp4 or png or jpeg. If it's not the case, the field should be null.
-- The `scAddress` field corresponds to the "crowdsale" field in the input file `smart-contracts-data.json`. 
-The `collectionName` field corresponds to the "collection" field in the input file.
+# Technical choices:
 
-## Instructions
+I didn't create a standalone script, rather I created an import endpoint reading and saving the JSON and the CSV files.
+I thought that having only one project would be easier as it wouldn't require two model definitions, two connection to a
+db… but it ended up being complicated to maneuver. I'd consider creating a proper script and an API to ease this. 
 
-We want a script that takes the two files contained in this repository (`organizers-data.csv` and `smart-contracts-data.json`)
-as input and insert them into a database of your choice. Then, we want an API to expose these data. Here's a list of the different
-use cases that we need:
-- We want to be able to see a complete list of our events.
-- We want to filter this list using the event sale start time.
-- We want to be able to request a particular event using its id.
-- We want to be able to update an event data (the event title, the line up, the image or video url and collection name)
+Here are the different libraries used:
 
-We expect you to create and share with us a git repository with the code you produced. We should be able to launch and use the Api 
-locally on all types of machine (MAC OS OR LINUX).
+* Spring as the main framework
+* Junit for testing
+* AssertJ for assertions and db testing. I like the fluency of the API, and it provides easy database testing.
+* Flyway for simple db migrations
+* rest-assured to verify JSON content
 
-That means that we should easily be able to 
-- start the DB 
-- insert data 
-- launch the API 
-- trigger the API endpoints
+I focused on writing my unit tests first, and then bring in the db and the http part with the integration tests. I tried
+to create some kind of hexagonal architecture to have an independent domain, and no dependencies leaking into it. 
 
-### Programming Language
+# Improvement points:
 
-You can use any language (or framework/library) that you feel comfortable with to solve the problem.
+* For the endpoint retrieving the events after a certain date, the query should perform the filtering, not the code
+* Proper error handling with correct status codes (404 when object not found for update for example)
 
-### Why do the coding exercise?
-
-We are a technology driven company and we have a passion for **clean code**.
-Coding is a part of our day to day job and the role we offer is very hands-on.
-We would like to make sure that anyone who joins us shares these values as well. So show us your passion for coding through this exercise!
-
-### Timeline to finish the exercise
-
-We appreciate you taking the time to do this exercise and as such there is a 7 days deadline for you to complete the assignment. 
-Also, we don't want you to spend too much time in solving this exercise by creating very complex solution.
-Be pragmatic and keep it simple like Uncle bob told us to... #KISS
-
+# Learning points
+* I'd switch the use of records to classic classes to leverage the builder pattern in order to create objects easier
+* I'd consider a less-structured db, maybe a document db such as Mongo as the data and the needs require more flexibility 
+than what's currently offered by MySQL.
+* I wouldn't use JPA again. The benefits of saving / retrieving entities easily with existing queries is not worth the pain 
+of performing a relevant object to entity mapping. I'd consider using plain SQL, or maybe a NoSQL db.
