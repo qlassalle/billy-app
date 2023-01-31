@@ -38,7 +38,7 @@ public class ImportService {
             var parsedLine = jsonParser.parse(json);
             parsedLine.forEach(smartContractEventRepository::save);
         } catch (IOException e) {
-            throw new RuntimeException("Unable to save events from CSV", e);
+            throw new RuntimeException("Unable to save events from JSON", e);
         }
     }
 }
