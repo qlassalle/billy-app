@@ -4,6 +4,7 @@ import com.qlassalle.billy.ports.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventService {
@@ -24,5 +25,9 @@ public class EventService {
 
     public List<Event> findAllFromStartDate(long epochSecond) {
         return eventRepository.findAllFromStartDate(epochSecond);
+    }
+
+    public Optional<Event> findById(int id) {
+        return eventRepository.findById(id);
     }
 }

@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class EventControllerIT extends IntegrationTest {
+class EventsControllerIT extends IntegrationTest {
 
     @LocalServerPort
     private int port;
@@ -68,6 +68,26 @@ class EventControllerIT extends IntegrationTest {
         var response = given().when()
                               .get("http://localhost:" + port + "/events/from/{epochSecond}",
                                    Instant.now().getEpochSecond())
+                              .then()
+                              .assertThat()
+                              .statusCode(200)
+                              .contentType(ContentType.JSON)
+                              .extract()
+                              .body()
+                              .asString();
+
+        assertThat(response).isEqualTo(expectedJson);
+    }
+
+    @Test
+    @Sql("classpath:/sql/insert_all_events_and_smart_contract_events.sql")
+    void shouldRetrieveEventById() throws IOException {
+        String expectedJson = new String(getClass().getClassLoader()
+                                                   .getResourceAsStream("output/event_by_id.json")
+                                                   .readAllBytes());
+
+        var response = given().when()
+                              .get("http://localhost:" + port + "/events/1")
                               .then()
                               .assertThat()
                               .statusCode(200)

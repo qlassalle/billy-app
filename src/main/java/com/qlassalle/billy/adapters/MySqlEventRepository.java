@@ -48,6 +48,12 @@ public class MySqlEventRepository implements EventRepository {
                               .toList();
     }
 
+    @Override
+    public Optional<Event> findById(int id) {
+        return eventRepository.findById(id)
+                              .map(this::toModel);
+    }
+
     private Event toModel(EventEntity event) {
         var lineUp = Optional.ofNullable(event.getLineUp())
                              .map(artists -> Arrays.stream(artists.split(","))
