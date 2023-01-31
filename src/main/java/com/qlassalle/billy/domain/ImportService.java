@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class AutoImporter {
+public class ImportService {
 
     private static final String CSV_PATH = "organizers-data.csv";
     private static final String JSON_PATH = "smart-contracts-data.json";
@@ -17,14 +17,12 @@ public class AutoImporter {
     private final CsvParser csvParser = new CsvParser();
     private final JsonParser jsonParser = new JsonParser();
 
-    public AutoImporter(EventRepository eventRepository, SmartContractEventRepository smartContractEventRepository) {
+    public ImportService(EventRepository eventRepository, SmartContractEventRepository smartContractEventRepository) {
         this.eventRepository = eventRepository;
         this.smartContractEventRepository = smartContractEventRepository;
-//        importCsv();
-//        importJson();
     }
 
-    private void importCsv() {
+    public void importCsv() {
         try (var inputStream = getClass().getClassLoader().getResourceAsStream(CSV_PATH)) {
             var csv = new String(inputStream.readAllBytes());
             var parsedLine = csvParser.parse(csv);
@@ -34,7 +32,7 @@ public class AutoImporter {
         }
     }
 
-    private void importJson() {
+    public void importJson() {
         try (var inputStream = getClass().getClassLoader().getResourceAsStream(JSON_PATH)) {
             var json = new String(inputStream.readAllBytes());
             var parsedLine = jsonParser.parse(json);
