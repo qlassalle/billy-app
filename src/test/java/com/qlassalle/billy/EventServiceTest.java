@@ -1,24 +1,38 @@
 package com.qlassalle.billy;
 
 import com.qlassalle.billy.domain.EventService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.qlassalle.billy.Fixtures.buildFullEvent;
-import static com.qlassalle.billy.Fixtures.buildFullEventWithSmartContractData;
+import static com.qlassalle.billy.Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class EventServiceTest {
 
-    private final InMemoryEventRepository eventRepository = new InMemoryEventRepository();
-    private final EventService eventService = new EventService(eventRepository);
+    private InMemoryEventRepository eventRepository;
+    private EventService eventService;
+
+    @BeforeEach
+    void setUp() {
+        eventRepository = new InMemoryEventRepository();
+        eventService = new EventService(eventRepository);
+    }
 
     @Test
     void shouldSaveEvent() {
         var event = buildFullEvent();
         eventService.save(event);
         assertThat(eventRepository.events).hasSize(1);
+    }
+
+    @Test
+    void shouldSetMediaURLToNullWhenInvalid() {
+        var event = buildFullEventWithInvalidMediaUrl();
+        eventService.save(event);
+        var savedEvent = eventRepository.events.get(0);
+        assertThat(savedEvent.mediaUrl()).isNull();
     }
 
     @Test
