@@ -53,8 +53,8 @@ to create some kind of hexagonal architecture to have an independent domain, and
 * Proper error handling with correct status codes (404 when object not found for update for example)
 
 # Learning points
-* I'd switch the use of records to classic classes to leverage the builder pattern in order to create objects easier
+* I'd switch the use of records to classic classes to leverage the builder pattern in order to ease objects creation
 * I'd consider a less-structured db, maybe a document db such as Mongo as the data and the needs require more flexibility 
 than what's currently offered by MySQL.
-* I wouldn't use JPA again. The benefits of saving / retrieving entities easily with existing queries is not worth the pain 
-of performing a relevant object to entity mapping. I'd consider using plain SQL, or maybe a NoSQL db.
+* I'd tried something else than JPA for the ORM part. The benefits of saving / retrieving entities easily with existing 
+queries is not worth the pain of performing a relevant object to entity mapping. I'd consider using plain SQL, or maybe a NoSQL db.
